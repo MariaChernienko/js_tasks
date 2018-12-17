@@ -24,6 +24,10 @@
     </ul>
 
     <script>
+
+      // Сделайте желтыми внешние ссылки, добавив им класс external.
+      // Все ссылки без href, без протокола и начинающиеся с http://internal.com считаются внутренними.
+      
       let links = document.querySelectorAll("a");
 
       links.forEach(element => {
