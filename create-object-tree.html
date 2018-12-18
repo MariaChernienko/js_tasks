@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Create Object Tree</title>
+  </head>
+  <body>
+    <div data-target="container"></div>
+    <script>
+      // Напишите функцию, которая создаёт вложенный список UL/LI (дерево) из объекта.
+
+      var data = {
+        Рыбы: {
+          Форель: {},
+          Щука: {}
+        },
+        Деревья: {
+          Хвойные: {
+            Лиственница: {},
+            Ель: {}
+          },
+          Цветковые: {
+            Берёза: {},
+            Тополь: {}
+          }
+        }
+      };
+
+      var container = document.querySelector('[data-target="container"]');
+
+      function createTree(container, data) {
+        const firstUl = document.createElement("ul");
+        container.appendChild(firstUl);
+        for (let key in data) {
+          let firstLi = document.createElement("li");
+          firstLi.textContent = key;
+          firstUl.appendChild(firstLi);
+
+          // firstUl.insertAdjacentHTML('afterend', '<li>'+ key + '<li>');   ?
+          const secondUl = document.createElement("ul");
+          firstLi.appendChild(secondUl);
+
+          for (let secondKey in data[key]) {
+            let secondLi = document.createElement("li");
+            secondLi.textContent = secondKey;
+            secondUl.appendChild(secondLi);
+
+            const thirdUl = document.createElement("ul");
+            secondLi.appendChild(thirdUl);
+            for (let thirdKey in data[key][secondKey]) {
+              let thirdLi = document.createElement("li");
+              thirdLi.textContent = thirdKey;
+              thirdUl.appendChild(thirdLi);
+            }
+          }
+        }
+      }
+
+      createTree(container, data);
+    </script>
+  </body>
+</html>
