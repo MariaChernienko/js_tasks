@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>RLE</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * Реализовать RLE-сжатие:
+       * Функция принимает строку и возвращает новую строку
+       * 2 и больше одинаковых букв стоящих подряд в исходной строке
+       * заменяются на эту букву и число повторений
+       * число 1 не добавляется!
+       *
+       * AAAB -> A3B, BCCDDDAXXXX -> BC2D3AX4
+       */
+      function rle(source) {
+        let res = '';
+        let counter = 1;
+        for (let i = 0; i < source.length; i++) {
+          if(source[i] !== source[i+1]) {
+            res+=source[i];
+            if(counter !== 1) res+=counter;
+            counter = 1;
+          } else counter++;
+        }
+        return res;
+      }
+
+      console.log(rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'));
+
+      
+      let convertedString = rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD');
+      let expectedString = 'AV3B3V2XDHJF4D6HA4J3D2SLS3D4';
+
+      console.assert(
+        convertedString === expectedString,
+        `${convertedString} is not equal to expected ${expectedString}`
+      );
+    </script>
+  </body>
+</html>
