@@ -47,13 +47,10 @@
     `;
 
     function convertToObject(sourceString) {
-      console.log(sourceString);
       const resultObject = {};
         sourceString = sourceString.replace(/\r?\n/g, '');
         sourceString = sourceString.replace(/\s*$/,'');
-        
         sourceString = sourceString.split(';');
-        console.log(sourceString);
         sourceString = sourceString.filter(element => element !== "");
         for (let i = 0; i < sourceString.length; i++) {
           let k = sourceString[i].trim().split(':');
