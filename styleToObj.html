@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Style to Object</title>
+</head>
+<body>
+  <script>
+
+  /**
+   * Функция принимает строку со стилями
+   * и возвращает объект у которого
+   * названия CSS свойств это ключи
+   * значения - строки 
+   */
+    'use strict';
+
+    const stylesString = `
+      background-color: #fff;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      border: 1px solid #e8e8e8;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      clear: both;
+      cursor: pointer;
+      float: left;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      height: 42px;
+      line-height: 40px;
+      outline: 0;
+      padding-left: 18px;
+      padding-right: 30px;
+      position: relative;
+      text-align: left !important;
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      white-space: nowrap;
+      width: auto;
+    `;
+
+    function convertToObject(sourceString) {
+      console.log(sourceString);
+      const resultObject = {};
+        sourceString = sourceString.replace(/\r?\n/g, '');
+        sourceString = sourceString.replace(/\s*$/,'');
+        
+        sourceString = sourceString.split(';');
+        console.log(sourceString);
+        sourceString = sourceString.filter(element => element !== "");
+        for (let i = 0; i < sourceString.length; i++) {
+          let k = sourceString[i].trim().split(':');
+          for (let j = 0; j < k.length; j++) {
+            resultObject[k[0]] = k[1].trim();
+          }
+        }
+      return resultObject;
+    }
+
+    console.log(convertToObject(stylesString));
+    const EXPECTED_OBJECT = {
+      "background-color": "#fff",
+      "-webkit-border-radius": "5px",
+      "border-radius": "5px",
+      "border": "1px solid #e8e8e8",
+      "-webkit-box-sizing": "border-box",
+      "box-sizing": "border-box",
+      "clear": "both",
+      "cursor": "pointer",
+      "float": "left",
+      "font-family": "inherit",
+      "font-size": "14px",
+      "font-weight": "400",
+      "height": "42px",
+      "line-height": "40px",
+      "outline": "0",
+      "padding-left": "18px",
+      "padding-right": "30px",
+      "position": "relative",
+      "text-align": "left !important",
+      "-webkit-transition": "all .2s ease-in-out",
+      "transition": "all .2s ease-in-out",
+      "-moz-user-select": "none",
+      "-ms-user-select": "none",
+      "user-select": "none",
+      "white-space": "nowrap",
+      "width": "auto",
+    };
+    console.assert(
+      JSON.stringify(EXPECTED_OBJECT) === JSON.stringify(convertToObject(stylesString)),
+      'Object is not equal to expected value'
+    );
+  </script>
+</body>
+</html>
