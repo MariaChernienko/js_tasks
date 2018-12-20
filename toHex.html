@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>to Hex</title>
+  </head>
+  <body>
+    <script>
+
+              // if(remainder === 0) {
+              //   str+=value/16;
+              //   str+=remainder;
+              // } else
+            /**
+             * Функция принимает число и возвращает строку
+             * Запись этого числа в 16-ричной системе счисления
+             * .toString(16) использовать нельзя
+             */
+             const vocabulary = {
+              10: 'A',
+              11: 'B', 
+              12: 'C',
+              13: 'D',
+              14: 'E',
+              15: 'F',
+            };
+
+            function toHex(value) {
+              let str = '';
+              let remainder = value%16;
+              
+              if(remainder === 0) {
+                str+=value/16;
+                str+=remainder;
+              } else {
+                str = toHex((value - value%16)/16);
+                if (value%16 > 9) str+=vocabulary[value%16];
+                else str+=value%16;
+              }
+              return str.replace('0','');
+            }
+
+
+            console.log(toHex(1562));
+
+            console.assert(
+              toHex(42).toLowerCase() === "2a",
+              "42 should be converted to 2a"
+            );
+            console.assert(
+              toHex(420).toLowerCase() === "1a4",
+              "420 should be converted to 1a4"
+            );
+    </script>
+  </body>
+</html>
