@@ -329,53 +329,56 @@
       // подсчитайте среднюю разницу в возрасте между матерями и их детьми
       // выполните выше указанные подсчеты для каждого из столетий Назначаем столетию людей, беря их год смерти, деля его на 100 и округляя: Math.ceil(person.died / 100).
 
+      
       function getAverageMenAge(people) {
         let counter = 0;
-        let middleAge = 0;
-        people.forEach(element => {
-          if (element.sex == "m") {
-            let age = element.died - element.born;
+        let res = 0;
+        people.reduce(function(accumulator, currentValue) { 
+          if (currentValue.sex == "m") {
+            let age = currentValue.died - currentValue.born;
+            res = accumulator+=age;
             counter++;
-            middleAge += age;
           }
-        });
-        return middleAge / counter;
+          return res;
+        }, 0);
+        return res/counter;
       }
+
       function getAverageWomenAge(people) {
         let counter = 0;
-        let middleAge = 0;
-        people.forEach(element => {
-          if (element.sex == "f") {
-            let age = element.died - element.born;
+        let res = 0;
+        people.reduce(function(accumulator, currentValue) { 
+          if (currentValue.sex == "f") {
+            let age = currentValue.died - currentValue.born;
+            res = accumulator+=age;
             counter++;
-            middleAge += age;
           }
-        });
-        return middleAge / counter;
+          return res;
+        }, 0);
+        return res/counter;
       }
+
+
       function getAverageDiff(people) {
         let counter = 0;
-        let averageDiff = 0;
-        for (let i = 0; i < people.length; i++) {
-          for (let j = 0; j < people.length; j++) {
-            if (people[i].name === people[j].mother) {
-              let mother = people[i].died - people[i].born;
-              let child = people[j].died - people[j].born;
-              let diff = Math.abs(mother - child);
+        let res = 0;
+
+        people.reduce(function(accumulator, currentValue) {     
+          people.reduce(function(nextAcc, nextCurValue) {
+            if (currentValue.name === nextCurValue.mother) {
+              let diff = nextCurValue.born - currentValue.born;
+              res += diff;
               counter++;
-              averageDiff += diff;
-              console.log(diff);
             }
-          }
-        }
-        return averageDiff / counter;
+          },0);
+          return res;
+        }, 0);
+        return Math.round(res/counter);
       }
-      let actualMen = getAverageMenAge(ANCESTRY_FILE);
-      console.log(actualMen);
-      let actualWomen = getAverageWomenAge(ANCESTRY_FILE);
-      console.log(actualWomen);
+
       let averageDiff = getAverageDiff(ANCESTRY_FILE);
       console.log(averageDiff);
+
     </script>
   </body>
 </html>
