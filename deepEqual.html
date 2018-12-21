@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Deep Equal</title>
+</head>
+<body>
+  <script>
+    'use strict';
+    /**
+     * Сравнивает два объекта по значениям свойств 
+     * 
+     * Если все значения во всех свойствах совпадают
+     * (включая свойства вложенных объектов)
+     * 
+     * Возвращает true иначе false
+     */
+    
+
+    let a = { name: 'Misha', order: { price: 20 } };
+    let b = { order: { price: 20 }, name: 'Misha' };
+    let c = { name: 'Misha', order: { price: 20 }, extraField: null };
+    let d = { order: { price: 20 }, name: 'Petya' };
+    let e = { name: 'Misha', order: { price: 1000 } };
+    let f = { name: 'Misha', order: { price: 20, extraField: null } };
+      
+    function deepEqual(Q, W) {
+      if(Q.constructor !== W.constructor) return false;
+
+      for (let p in Q) {
+        if (!Q.hasOwnProperty(p)) continue;
+
+        if (!W.hasOwnProperty(p)) return false;
+
+        if (Q[p] === W[p] ) continue;
+
+        if (typeof(Q[p] ) !== "object") return false;
+
+        if (!deepEqual(Q[p], W[p])) return false;
+      }
+
+      for (let p in W) {
+        if (W.hasOwnProperty(p) && !W.hasOwnProperty(p) ) return false;
+      }
+      return true;
+    }
+    console.log(deepEqual(a, b));
+
+    console.assert(deepEqual(a, b) === true, 'A and B should be equal');
+    console.assert(deepEqual(a, c) === false, 'A and C should NOT be equal');
+    console.assert(deepEqual(a, d) === false, 'A and D should NOT be equal');
+    console.assert(deepEqual(a, e) === false, 'A and E should NOT be equal');
+    console.assert(deepEqual(a, f) === false, 'A and F should NOT be equal');
+  </script>
+</body>
+</html>
