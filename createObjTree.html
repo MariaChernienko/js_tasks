@@ -10,7 +10,6 @@
     <div data-target="container"></div>
     <script>
       // Напишите функцию, которая создаёт вложенный список UL/LI (дерево) из объекта.
-
       var data = {
         Рыбы: {
           Форель: {},
@@ -27,9 +26,7 @@
           }
         }
       };
-
       var container = document.querySelector('[data-target="container"]');
-
       function createTree(container, data) {
         const firstUl = document.createElement("ul");
         container.appendChild(firstUl);
@@ -37,16 +34,13 @@
           let firstLi = document.createElement("li");
           firstLi.textContent = key;
           firstUl.appendChild(firstLi);
-
           // firstUl.insertAdjacentHTML('afterend', '<li>'+ key + '<li>');   ?
           const secondUl = document.createElement("ul");
           firstLi.appendChild(secondUl);
-
           for (let secondKey in data[key]) {
             let secondLi = document.createElement("li");
             secondLi.textContent = secondKey;
             secondUl.appendChild(secondLi);
-
             const thirdUl = document.createElement("ul");
             secondLi.appendChild(thirdUl);
             for (let thirdKey in data[key][secondKey]) {
@@ -57,7 +51,6 @@
           }
         }
       }
-
       createTree(container, data);
     </script>
   </body>
