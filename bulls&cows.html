@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bulls and cows</title>
+  </head>
+  <body>
+    <input type="text" class="input" />
+    <div class="result">
+      <div><span>value</span> <span>cow</span> <span>bull</span></div>
+    </div>
+
+    <script>
+      const input = document.querySelector(".input");
+      const random = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+
+      const check = (random, value) => {
+        const randomValue = String(random).split("");
+        const inputValue = String(value).split("");
+        let cow = 0;
+        let bull = 0;
+
+        for (let i = 0; i < inputValue.length; i++) {
+          for (let j = 0; j < randomValue.length; j++) {
+            if (inputValue[i] === randomValue[j] && i === j) {
+              bull++;
+              cow++;
+              break;
+            } else if (inputValue[i] === randomValue[j]) {
+              cow++;
+              break;
+            }
+          }
+        }
+
+        document
+          .querySelector(".result")
+          .insertAdjacentHTML(
+            "beforeend",
+            "<div><span>" +
+              value +
+              "</span><span>&nbsp&nbsp&nbsp" +
+              cow +
+              "</span><span>&nbsp&nbsp&nbsp&nbsp&nbsp" +
+              bull +
+              "</span></div>"
+          );
+
+        if (bull === 4 && cow === 4) {
+          alert("You win" + value);
+        }
+      };
+
+      input.addEventListener("keyup", e => {
+        if (e.keyCode === 13) {
+          const value = input.value;
+          check(random, value);
+        }
+      });
+    </script>
+  </body>
+</html>
