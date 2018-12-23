@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Calendar Table</title>
+  </head>
+  <body>
+  
+    <div class="cal"></div>
+    
+
+    <script>
+      const createCalendar = (id, year, month) => {
+        const cal = document.querySelector(".cal");
+
+        let table =
+          "<table><thead><tr><td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td></tr></thead><tbody><tr>";
+        tableCells = [];
+
+        let date = new Date(year, month - 1);
+        let day = date.getDay();
+        let days = new Date(year, month, 0).getDate();
+        console.log(date, day, days);
+
+        for (let i = 1; i < day+1; i++) {
+          tableCells[i] = "<td>--</td>";
+        }
+
+        for (let i = day+1; i < days + day + 1; i++) {
+          let number = i - day;
+
+          if (i % 7 !== 0) {
+            tableCells[i] = "<td>" + number + "</td>";
+            number++;
+          } else {
+            tableCells[i] = "<td>" + number + "</td></tr><tr>";
+          }
+        }
+
+        for (let i = days + day + 1; i < days + day + 1 + 7 - day; i++) {
+          tableCells[i] = "<td>--</td>";
+        }
+
+        tableCells.forEach(element => {
+          table += element;
+          console.log(element);
+        });
+
+        table += "</tr></tbody></table>";
+
+
+        cal.insertAdjacentHTML('beforeend', table);
+
+      };
+      createCalendar("cal", 2019, 02);
+    </script>
+  </body>
+</html>
+<!-- insertAdjacentHTML -->
