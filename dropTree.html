@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Drop Tree</title>
+</head>
+<body>
+  <style>
+    li {
+      cursor: pointer;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    span:hover {
+      font-weight: bold;
+    }
+  </style>
+  <ul class="list">
+    <li>
+      <span>Отдых активный</span>
+      <ul>
+        <li>
+            <span>Плюсы</span>
+          <ul>
+            <li><span>Хороший сон</span></li>
+            <li><span>Красный нос</span></li>
+            <li><span>Это весело</span></li>
+          </ul>
+        </li>
+        <li>
+          <span>Минусы</span>
+         
+          <ul>
+            <li><span>Холодно</span></li>
+            <li><span>Голодно</span></li> 
+            <li><span>Страшно</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span>Отдых пассивный</span>
+      <ul>
+        <li>
+          <span>Плюсы</span>
+            <ul>
+              <li><span>Тепло</span></li>
+              <li><span>Сытно</span></li>
+              <li><span>И совсем не страшно</span></li>
+            </ul>
+        </li>
+        <li>
+          <span>Минусы</span>
+          <ul>
+            <li><span>Не будем смеяться</span></li>
+            <li><span>Будем плакать</span></li>
+            <li><span>Много</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    const list = document.querySelector('.list');
+    list.addEventListener('click', (e) => {
+      if(e.target.tagName === 'SPAN') {
+        e.target.parentNode.children[1].classList.toggle('hidden');
+      }
+    });
+  </script>
+  
+</body>
+</html>
