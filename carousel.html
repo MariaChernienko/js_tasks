@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Carousel</title>
+</head>
+<body>
+  <style>
+    .carousel {
+      width: 470px;
+      height: 200px;
+      border-radius: 10px;
+      background-color: pink;
+      position: relative;
+      overflow: hidden;
+    }
+    ul {
+      position: absolute;
+      top: 40px;
+      left: -10px;
+      margin: 0;
+      padding: 0;
+      width: 120vw;
+    }
+    li {
+      display: inline-block;
+      list-style-type: none;
+      padding: 10px;
+    }
+    .carousel .arrow {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 80px;
+      border-radius: 5px;
+    }
+    .carousel .left {
+      left: 0;
+    }
+    .carousel .right {
+      right: 0;
+    }
+  </style>
+
+
+  <div class="carousel">
+      <ul>
+        <li><img src="https://js.cx/carousel/1.png"></li>
+        <li><img src="https://js.cx/carousel/2.png"></li>
+        <li><img src="https://js.cx/carousel/3.png"></li>
+        <li><img src="https://js.cx/carousel/4.png"></li>
+        <li><img src="https://js.cx/carousel/5.png"></li>
+        <li><img src="https://js.cx/carousel/6.png"></li>
+        <li><img src="https://js.cx/carousel/7.png"></li>
+        <li><img src="https://js.cx/carousel/8.png"></li>
+        <li><img src="https://js.cx/carousel/9.png"></li>
+        <li><img src="https://js.cx/carousel/10.png"></li>
+      </ul>
+      <button class="arrow left">⇦</button>
+      <button class="arrow right">⇨</button>
+  </div>
+
+  <script>
+    const leftArrow = document.querySelector('.left');
+    const rightArrow = document.querySelector('.right');
+    const items = document.querySelector('.carousel > ul');
+    const computedStyle = getComputedStyle(items);
+
+    const step = 450;
+
+    leftArrow.addEventListener('click', (e) => {
+      const move = (parseInt(computedStyle.left) + step) + 'px';
+      if(-parseInt(getComputedStyle(items).left) > step) {
+        items.style.left = move;
+      }
+    });
+    rightArrow.addEventListener('click', (e) => {
+      const move = (parseInt(computedStyle.left) - step) + 'px';
+      if (-parseInt(getComputedStyle(items).left) < parseInt(getComputedStyle(items).width) - step) {
+        items.style.left = move;
+      }
+    });
+  </script>
+</body>
+</html>
