@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Move Ball Field</title>
+    <style>
+      .field {
+        width: 200px;
+        height: 150px;
+        border: 10px groove black;
+        background-color: #00ff00;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .ball {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 40px;
+        width: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="field">
+      <img src="https://js.cx/clipart/ball.svg" class="ball" /> . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . .
+    </div>
+
+    <script>
+      const field = document.querySelector(".field");
+      const ball = document.querySelector(".ball");
+
+      const border = parseInt(getComputedStyle(field).borderBottomWidth);
+      const distanceTop = field.offsetTop + border;
+      const distanceLeft = field.offsetLeft + border;
+
+      const fieldWidth = parseInt(getComputedStyle(field).width);
+      const fieldHeight = parseInt(getComputedStyle(field).height);
+      const ballWidth = parseInt(getComputedStyle(ball).width);
+
+      field.addEventListener("click", e => {
+        ball.style.top = e.clientY - distanceTop - ballWidth / 2 + "px";
+        ball.style.left = e.clientX - distanceLeft - ballWidth / 2 + "px";
+
+        if (e.clientX - distanceLeft < ballWidth / 2) {
+          ball.style.left = "0px";
+        } else if (e.clientY - distanceTop < ballWidth / 2) {
+          ball.style.top = "0px";
+        } else if (distanceLeft + fieldWidth - e.clientX < ballWidth / 2) {
+          ball.style.left = fieldWidth - ballWidth + "px";
+        } else if (distanceTop + fieldHeight - e.clientY < ballWidth / 2) {
+          ball.style.top = fieldHeight - ballWidth + "px";
+        }
+      });
+    </script>
+  </body>
+</html>
