@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sort Table</title>
+  </head>
+  <body>
+    <div class="table"></div>
+
+    <script>
+      const container = document.querySelector(".table");
+      const obj = [
+        {
+          name: "Илья",
+          age: 20
+        },
+        {
+          name: "Пётр",
+          age: 35
+        },
+        {
+          name: "Святослав",
+          age: 17
+        },
+        {
+          name: "Василий",
+          age: 22
+        },
+        {
+          name: "Мстислав",
+          age: 32
+        }
+      ];
+
+      const createTable = (container, obj) => {
+        container.innerHTML = "";
+        let content =
+          "<table><thead><tr><td>Возраст</td><td>Имя</td></tr></thead><tbody>";
+        obj.forEach(element => {
+          content +=
+            "<tr><td>" +
+            element.age +
+            "</td><td>" +
+            element.name +
+            "</td></tr>";
+        });
+        content += "</tbody></table>";
+        container.insertAdjacentHTML("beforeend", content);
+      };
+
+      const sortItems = (obj, property) => {
+        obj.sort(function(a, b) {
+          if (a[property] > b[property]) {
+            return 1;
+          }
+          if (a[property] < b[property]) {
+            return -1;
+          }
+          return 0;
+        });
+      };
+
+      createTable(container, obj);
+
+      container.addEventListener("click", e => {
+        if (e.target.textContent === "Имя") {
+          sortItems(obj, "name");
+          createTable(container, obj);
+        } else if (e.target.textContent === "Возраст") {
+          sortItems(obj, "age");
+          createTable(container, obj);
+        }
+      });
+    </script>
+  </body>
+</html>
