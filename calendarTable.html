@@ -22,12 +22,12 @@
         let days = new Date(year, month, 0).getDate();
         console.log(date, day, days);
 
-        for (let i = 1; i < day + 1; i++) {
+        for (let i = 1; i < day; i++) {    
           tableCells[i] = "<td>--</td>";
         }
 
-        for (let i = day + 1; i < days + day + 1; i++) {
-          let number = i - day;
+        for (let i = day; i < days + day; i++) {  
+          let number = i - day + 1;
 
           if (i % 7 !== 0) {
             tableCells[i] = "<td>" + number + "</td>";
