@@ -37,16 +37,17 @@
           }
         }
 
-        for (let i = days + day + 1; i < days + day + 1 + 7 - day; i++) {
-          tableCells[i] = "<td>--</td>";
+        const ost = 7 - (tableCells.length-1)%7;
+        for (let i = 0; i < ost; i++) {
+          tableCells.push("<td>--</td>");
         }
 
         tableCells.forEach(element => {
           table += element;
-          console.log(element);
         });
 
         table += "</tr></tbody></table>";
+
         cal.insertAdjacentHTML("beforeend", table);
       };
       createCalendar("cal", 2019, 02);
